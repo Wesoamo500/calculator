@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Calculator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spartan&display=swap" rel="stylesheet">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    body{
+      margin-top: 50px;
+      background-color: hsl(222, 26%, 31%);
+      font-family: 'Spartan', sans-serif;
+    }
+    .container{
+      margin: auto;
+      
+      width:50%;
+      padding: 15px;
+      padding-left: 25px;
+    }
+    .left{
+      float: left;
+      width: 30%;
+    }
+    .right{
+      text-align: right;
+      padding-right: 40px;
+    }
+    .slider{
+      -webkit-appearance:none;
+      appearance:none;
+      outline:none;
+      background-color: hsl(223, 31%, 20%);
+      height:17px;
+      width:13%;
+      border-radius: 50px;
+
+    }
+    .slider::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      appearance:none;
+      background-color: hsl(6, 63%, 50%);
+      width: 30%;
+      height: 14px;
+      border-radius:50px;
+
+    }
+    #p-1{line-height: 0px;letter-spacing: 3px;color: white;}
+    .header{margin-bottom: 20px}
+    .answer{
+      padding: 25px;
+      text-align:right;
+      margin-bottom:20px;
+      background-color:hsl(224, 36%, 15%);
+      color:white;
+      font-size: 25px;
+    }
+    .answer,.container1{width:90%; border-radius: 8px;border:none;}
+    .row{width:100%;padding: 1px;margin-bottom: 5px;}
+    .row-1-1,.row-2-2,.row-3-3,.row-4-4{
+      width:22%;
+      padding: 10px;
+      margin-right: 5px; 
+      border-radius: 10px;
+      background-color:hsl(0, 0, 100%);
+      font-size: 25px;
+      box-shadow: none;
+      color: hsl(221, 14%, 31%);
+    }
+    .row-5-5{
+      width:47%;
+      padding: 10px;
+      margin-right: 5px;
+      border-radius: 10px;
+      font-size: 25px;
+    }
+    @media screen and (max-width: 900px){
+      .container{
+        width: 100%;
+      }
+      .row-1-1,.row-2-2,.row-3-3,.row-4-4{
+        width: 19%;
+        font-size: 18px;
+      }
+      .row-5-5{
+        width:40%;
+        font-size: 20px;
+      }
+    }
+    .row-1-1-4,.row-5-5-1{background-color:hsl(225, 21%, 49%);color:white;}
+    .row-5-5-2{background-color: hsl(6, 63%, 50%);color:white;}
+    .container1{text-align: center;padding: 10px;background-color:  hsl(223, 31%, 20%);}
+
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body id="main">
+  <div class="container">
+    <div class="header">
+      <section class="left">
+        <h2 style="color: white;" id="calc">calc</h2>
+      </section>
+      <section class="right">
+        <div>
+          <p id="p-1">1 2 3</p>
+          <label id="label" style="color: white;">THEME</label>
+          <input type="range" min="1" max="3" class="slider" id="slider-1" value="1" oninput="toggle(this)">
+        </div>
+      </section>
+    </div>
+    <div class="input" id="input-1">
+      <input type="text" name="" class="answer" id="answer-1" value="0">
+    </div>
+    <div class="container1" id="container-1">
+      <div class="row row-1">
+        <input type="button" name="" value=7 class="row-1-1 btn" onclick="dis(7)">
+        <input type="button" name="" value=8 class="row-1-1 btn"  onclick="dis(8)">
+        <input type="button" name="" value=9 class="row-1-1 btn"  onclick="dis(9)">
+        <input type="button" name="" value="DEL" class="row-1-1 btn row-1-1-4" onclick="clr()" >
+      </div>
+      <div class="row row-2">
+        <input type="button" name="" value=4 class="row-2-2 btn"  onclick="dis(4)">
+        <input type="button" name="" value=5 class="row-2-2 btn"  onclick="dis(5)">
+        <input type="button" name="" value=6 class="row-2-2 btn"  onclick="dis(6)">
+        <input type="button" name="" value="+" class="row-2-2 btn" data-action='add' onclick="dis('+')">
+      </div>
+      <div class="row row-3">
+        <input type="button" name="" value=1 class="row-3-3 btn"  onclick="dis(1)">
+        <input type="button" name="" value=2 class="row-3-3 btn"  onclick="dis(2)">
+        <input type="button" name="" value=3 class="row-3-3 btn"  onclick="dis(3)">
+        <input type="button" name="" value="-" class="row-3-3 btn" data-action='sub'  onclick="dis('-')">
+      </div>
+      <div class="row row-4">
+        <input type="button" name="" value="." class="row-4-4 btn" data-action='decimal'  onclick="dis('.')">
+        <input type="button" name="" value=0 class="row-4-4 btn"  onclick="dis(0)">
+        <input type="button" name="" value="/" class="row-4-4 btn" data-action='div'  onclick="dis('/')">
+        <input type="button" name="" value="x"class="row-4-4 btn" data-action='mul'  onclick="dis('*')">
+      </div>
+      <div class="row row-5">
+        <input type="button" name="" value="RESET" class="row-5-5 row-5-5-1 btn" onclick="clr()">
+        <input type="button" name="" value="=" class="row-5-5 row-5-5-2 btn" onclick="solve()">
+      </div>
+      
+    </div>
+  </div>
+ 
+
+
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="wesoamo500.github.io">Suleman Abdul Manan</a>.
+  </div>
+  <script type="text/javascript" src="calculator.js"></script>
+</body>
+</html>
